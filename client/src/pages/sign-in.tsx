@@ -16,7 +16,7 @@ export default function SignIn() {
     const err = validate();
     if (err) return setError(err);
     try {
-      await api.post('/auth/signin', { email, password });
+      await api.post('/auth/login', { email, password });
     } catch (err: any) {
       setError(err.response?.data?.message || 'Signin failed');
     }

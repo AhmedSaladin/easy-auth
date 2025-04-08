@@ -21,7 +21,7 @@ export default function SignUp() {
     const err = validate();
     if (err) return setError(err);
     try {
-      await api.post('/auth/signup', { email, name, password });
+      await api.post('/auth/register', { email, name, password });
     } catch (err: any) {
       setError(err.response?.data?.message || 'Signup failed');
     }
