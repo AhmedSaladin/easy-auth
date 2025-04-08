@@ -1,16 +1,30 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SignIn from './pages/sign-in';
-import SignUp from './pages/sign-up';
-import Home from './pages/home';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import SignupPage from './pages/sign-up.page';
+import LoginPage from './pages/login.page';
+import ApplicationPage from './pages/home.page';
+import ProtectedRoute from './components/protected-route';
 
-export default function App() {
+const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/login' element={<SignIn />}></Route>
-        <Route path='/sign-up' element={<SignUp />}></Route>
-        <Route index element={<Home />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Router>
+      <div className="font-sans antialiased text-gray-900">
+        <Routes>
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route 
+            path="/app" 
+            element={
+              <ProtectedRoute>
+                <ApplicationPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="/" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
+
+export default App;
